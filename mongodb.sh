@@ -11,14 +11,14 @@ USERID=$(id -u)
 # LOG_FILE="$LOGS_FLODER/$SCRIPT_NAME.log"
 
 # mkdir -p $LOGS_FLODER
- echo "Script started executing at: $(date)" | tee -a $LOG_FILE
+ echo "Script started executing at: $(date)" # | tee -a $LOG_FILE
 
 if [ $USERID -ne 0 ]
 then
-    echo -e "$R ERROR:: Please run this script with root acces $N | tee -a $LOG_FILE
+    echo -e "$R ERROR:: Please run this script with root acces $N" #| tee -a $LOG_FILE
     exit 1
 else
-    echo -e "$G Your running with root access" | tee -a $LOG_FILE
+    echo -e "$G Your running with root access" #| tee -a $LOG_FILE
 fi    
 
 # VALIDATE(){

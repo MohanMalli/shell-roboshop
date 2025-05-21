@@ -1,7 +1,7 @@
 #!/bin/bash
 
 AMI_ID="ami-09c813fb71547fc4f"
-SG_ID="sg-0c50cc7d72d42f4dd" # replace with your SG ID
+SG_ID="sg-0c50cc7d72d42f4dd"  # replace with SG ID
 INSTANCES=("mongodb" "redis" "mysql" "rabbitmq" "catalogue" "user" "cart" "shipping" "payment" "dispatch" "frontend")
 ZONE_ID="Z05130911714KBFT4KH1G" # replace with your ZONE ID
 DOMAIN_NAME="malli.site" # replace with your domain

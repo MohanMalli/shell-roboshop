@@ -44,6 +44,8 @@ VALIDATE(){
  systemctl start mongod &>>$LOG_FILE
  VALIDATE $? "Starting mongodb"
 
+# here s stands for substitue and g means replaces the complete line 
+
  sed -i 's/127.0.0.1/0.0.0.0/g' /etc/mongod.conf
  VALIDATE $? "Editing mongodb conf file for remote connections"
 

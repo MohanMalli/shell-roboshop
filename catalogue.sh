@@ -21,13 +21,14 @@ else
     echo -e " $G Your running with root Access $N "
 fi
 
-VALIDATE(){
+VALIDATE() {
     if [ $1 -eq 0 ]
     then
         echo -e  " $2 is... $G SUCCESS $N "
     else
         echo -e  " $2 is... $R FAILURE $N "
-        exit 1    
+        exit 1
+    fi        
 }
 
 dnf module disable nodejs -y

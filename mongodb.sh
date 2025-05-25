@@ -7,7 +7,7 @@ USERID=$(id -u)
  N="\e[0m"
 
 LOGS_FLODER="/var/log/roboshop-logs"
-CRIPT_NAME=$(echo $0 | cut -d "." -f1)
+SCRIPT_NAME=$(echo $0 | cut -d "." -f1)
 LOG_FILE="$LOGS_FLODER/$SCRIPT_NAME.log"
 
 mkdir -p $LOGS_FLODER
@@ -15,36 +15,37 @@ mkdir -p $LOGS_FLODER
 
 if [ $USERID -ne 0 ]
 then
-    echo -e "$R ERROR:: Please run this script with root acces $N" | tee -a $LOG_FILE
+    echo -e " $R ERROR:: Please run this script with root access $N " | tee -a $LOG_FILE
     exit 1
 else
-    echo -e "$G Your running with root access" | tee -a $LOG_FILE
+    echo -e " $G Your running with root access " | tee -a $LOG_FILE
 fi    
 
-# VALIDATE(){
-#     if [$1 -ne 0 ]
-#     then
-#         echo -e $2 is ... $G SUCCESS $N | tee -a $LOG_FILE
-#     else
-#         echo -e $2 is ... $R FAILURE $N | tee -a $LOG_FILE
-#         exit 1
-#     fi 
-# }
+# validate functions takes input as exit status, what command they tried to install
+VALIDATE(){
+    if [$1 -ne 0 ]
+    then
+        echo -e $2 is ... $G SUCCESS $N | tee -a $LOG_FILE
+    else
+        echo -e $2 is ... $R FAILURE $N | tee -a $LOG_FILE
+        exit 1
+    fi 
+}
  
-#  cp mongo.repo /etc/yum.repos.d/mongodb.repo
-#  VALIDATE $? "Copying MongoDB repo"
+ cp mongo.repo /etc/yum.repos.d/mongodb.repo
+ VALIDATE $? "Copying mongodb repo"
 
-#  dnf install mongodb-org -y &>>$LOG_FILE
-#  VALIDATE $? "Installing mongodb server"
+ dnf install mongodb-org -y &>>$LOG_FILE
+ VALIDATE $? "Installing mongodb server"
 
-#  systemctl enable mongod &>>$LOG_FILE
-#  VALIDATE $? "Enabling MongoDB"
+ systemctl enable mongod &>>$LOG_FILE
+ VALIDATE $? "Enabling mongodb"
 
-#  systemctl start mongod &>>$LOG_FILE
-#  VALIDATE $? "Starting MongoDB"
+ systemctl start mongod &>>$LOG_FILE
+ VALIDATE $? "Starting mongodb"
 
-#  sed -i 's/127.0.0.1/0.0.0.0/g' /etc/mongod.conf
-#  VALIDATE $? "Editing MongoDB conf file for remote connections"
+ sed -i 's/127.0.0.1/0.0.0.0/g' /etc/mongod.conf
+ VALIDATE $? "Editing mongodb conf file for remote connections"
 
-#  systemctl restart mongod &>>$LOG_FILE
-#  VALIDATE $? "Restarting MongoDB"
+ systemctl restart mongod &>>$LOG_FILE
+ VALIDATE $? "Restarting mongodb"

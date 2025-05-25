@@ -6,11 +6,11 @@ USERID=$(id -u)
  Y="\e[33m"
  N="\e[0m"
 
-LOGS_FLODER="/var/log/roboshop-logs"
+LOGS_FOLDER="/var/log/roboshop-logs"
 SCRIPT_NAME=$(echo $0 | cut -d "." -f1)
-LOG_FILE="$LOGS_FLODER/$SCRIPT_NAME.log"
+LOG_FILE="$LOGS_FOLDER/$SCRIPT_NAME.log"
 
-mkdir -p $LOGS_FLODER
+mkdir -p $LOGS_FOLDER
  echo "Script started executing at: $(date)"  | tee -a $LOG_FILE
 
 if [ $USERID -ne 0 ]

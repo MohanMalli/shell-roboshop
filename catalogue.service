@@ -5,10 +5,10 @@ Description = Catalogue Service
 User=roboshop
 Environment=MONGO=tree
 // highlight-start
-Environment=MONGO_URL="mongodb://mongodb.malli.site:27017/Catalogue"
+Environment=MONGO_URL="mongodb://mongodb.malli.site:27017/catalogue"
 // hightlight-end
 ExecStart=/bin/node /app/server.js
-SyslogIdentifier=Catalogue
+SyslogIdentifier=catalogue
 
 [Install]
 WantedBy=multi-user.target

@@ -1,0 +1,14 @@
+[Unit]
+Description = Catalogue Service
+
+[Service]
+User=roboshop
+Environment=MONGO=tree
+// highlight-start
+Environment=MONGO_URL="mongodb://mongo.malli.site:27017/Catalogue"
+// hightlight-end
+ExecStart=/bin/node /app/server.js
+SyslogIdentifier=Catalogue
+
+[Install]
+WantedBy=multi-user.target

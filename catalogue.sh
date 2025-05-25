@@ -62,3 +62,11 @@ VALIDATE $? "unzipping catalogue"
 
 npm install
 VALIDATE $? "Installing Dependencies"
+
+cp $SCRIPT_DIR/catalogue.service /etc/systemd/system/catalogue.service
+VALIDATE $? "Copying catalogue service"
+
+systemctl daemon-reload
+systemctl enable catalogue
+systemctl start catalogue
+VALIDATE $? "Starting Catalogue"

@@ -4,7 +4,7 @@ USERID=$(id -u)
 R="\e[31m"
 Y="\e[32m"
 G="\e[33m"
-N="\e[0N"
+N="\e[0m"
 
 LOGS_FOLDER="/var/log/roboshop-logs"
 SCRIPT_NAME=$(echo $0 | cut -d "." -f1)

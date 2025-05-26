@@ -10,7 +10,7 @@ N="\e[0N"
 LOGS_FOLDER="/var/log/roboshop-logs"
 SCRIPT_NAME=$(echo $0 | cut -d "." -f1)
 LOG_FILE="$LOGS_FOLDER/$SCRIPT_NAME.log"
-
+SCRIPT_DIR=$PWD
 
 mkdir -p $LOGS_FOLDER
 echo " Script Start execute at: $(date)"
@@ -66,7 +66,7 @@ npm install
 VALIDATE $? "Installing Dependencies"
 
 cp $SCRIPT_DIR/user.service /etc/systemd/system/user.service
-VALIDATE $? "Copying catalogue service"
+VALIDATE $? "Copying user service"
 
 systemctl daemon-reload 
 systemctl enable user 

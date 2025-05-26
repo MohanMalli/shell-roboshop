@@ -59,7 +59,7 @@ rm -rf /etc/nginx/nginx.conf &>>$LOG_FILE
 VALIDATE $? "remove default nginx conf"
 
 cp $SCRIPT_DIR/nginx.conf /etc/nginx/nginx.conf
-VALIDATE $? "Coping nginx.conf"
+VALIDATE $? "Copying nginx.conf"
 
 systemctl restart nginx
 VALIDATE $? "Restarting nginx"

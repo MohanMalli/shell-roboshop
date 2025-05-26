@@ -13,7 +13,7 @@ LOG_FILE="$LOGS_FOLDER/$SCRIPT_NAME.log"
 mkdir -p $LOGS_FOLDER
 echo " Script started Executing at: $(date) "
 
-if [ USERID -ne 0 ]
+if [ $USERID -ne 0 ]
 then
     echo -e " $R ERROR :: Please run this with root Access $N "
 else

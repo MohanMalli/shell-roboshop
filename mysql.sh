@@ -16,6 +16,33 @@ echo " Script started Executing at: $(date) "
 if [ $USERID -ne 0 ]
 then
     echo -e " $R ERROR :: Please run this with root Access $N "
+    exit 1
 else
     echo -e " $G your running with root Access $N "
 fi
+
+# validate functions takes input as exit status, what command they tried to install
+VALIDATE(){
+    if [ $1 -eq 0 ]
+      then 
+         echo -e "$2 is ... $G SUCCESS $N"
+      else
+         echo -e "$2 is ... $R FAILURE $N"
+         exit 1
+
+    fi
+         
+}
+  
+  dnf install mysql-server -y
+  VALIDATE $? " Installing MySQL server "
+
+  systemctl enable mysqld
+  VALIDATE $? " Enabling MySQL "
+
+  systemctl start mysqld 
+  VALIDATE $? " Starting MySQL "
+
+  
+
+

@@ -37,10 +37,10 @@ dnf module disable nodejs -y &>>LOG_FILE
 VALIDATE $? " Disabling nodejs "
 
 dnf module enable nodejs:20 -y &>>LOG_FILE
-VALIDATE $? " Enabling nodejs "
+VALIDATE $? " Enabling nodejs:20 "
 
 dnf install nodejs -y &>>LOG_FILE
-VALIDATE $? " Installing nodejs "
+VALIDATE $? " Installing nodejs:20 "
 
 id roboshop
 if [ $? -ne 0 ]
@@ -57,9 +57,9 @@ VALIDATE $? "Creating app directory"
 curl -L -o /tmp/user.zip https://roboshop-artifacts.s3.amazonaws.com/user-v3.zip &>>LOG_FILE
 VALIDATE $? "Downloading user"
 
-rm -rf /app/* &>>LOG_FILE
+rm -rf /app/*  
 cd /app
-unzip /tmp/user.zip 
+unzip /tmp/user.zip &>>LOG_FILE
 VALIDATE $? "unzipping user"
 
 npm install &>>LOG_FILE

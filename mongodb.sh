@@ -18,7 +18,7 @@ then
     echo -e " $R ERROR:: Please run this script with root access $N " | tee -a $LOG_FILE
     exit 1
 else
-    echo -e " $G Your running with root access " | tee -a $LOG_FILE
+    echo -e " $G Your running with root access  $N " | tee -a $LOG_FILE
 fi    
 
 # validate functions takes input as exit status, what command they tried to install

@@ -11,15 +11,15 @@ LOGS_FOLDER="/var/log/roboshop-logs"
 SCRIPT_NAME=$(echo $0 | cut -d "." -f1)
 LOG_FILE="$LOGS_FOLDER/$SCRIPT_NAME.log"
 
-mkdir -p $LOGS_FOLDER
+mkdir -p $LOGS_FOLDER   | tee -a $LOG_FILE
 echo " Script started Executing at: $(date) "
 
 if [ $USERID -ne 0 ]
 then
-    echo -e " $R ERROR :: Please run this with root Access $N "
+    echo -e " $R ERROR :: Please run this with root Access $N " | tee -a $LOG_FILE
     exit 1
 else
-    echo -e " $G your running with root Access $N "
+    echo -e " $G your running with root Access $N "  | tee -a $LOG_FILE
 fi
 
 echo "Please enter root password to setup"
@@ -38,16 +38,16 @@ VALIDATE(){
          
 }
   
-  dnf install mysql-server -y
+  dnf install mysql-server -y &>>$LOG_FILE
   VALIDATE $? " Installing MySQL server "
 
-  systemctl enable mysqld
+  systemctl enable mysqld &>>$LOG_FILE
   VALIDATE $? " Enabling MySQL "
 
-  systemctl start mysqld 
+  systemctl start mysqld &>>$LOG_FILE
   VALIDATE $? " Starting MySQL "
 
-  mysql_secure_installation --set-root-pass $MYSQL_ROOT_PASSWORD 
+  mysql_secure_installation --set-root-pass $MYSQL_ROOT_PASSWORD &>>$LOG_FILE
   VALIDATE $? "Setting MySQL root password"
 
   END_TIME=$(date +%s)

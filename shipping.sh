@@ -79,7 +79,7 @@ VALIDATE $? " Start the shipping "
 dnf install mysql -y 
 VALIDATE $? " Installing mysql "
 
-mysql -h mysql.malli.site -u root -p$MYSQL_ROOT_PASSWORD -e 'use cities'
+ mysql -h mysql.malli.site -u root -p $MYSQL_ROOT_PASSWORD -e 'use cities'
 if [ $? -ne 0 ]
 then 
     mysql -h mysql.malli.site -uroot -p$MYSQL_ROOT_PASSWORD < /app/db/schema.sql

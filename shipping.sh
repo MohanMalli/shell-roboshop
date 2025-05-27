@@ -80,6 +80,7 @@ dnf install mysql -y
 VALIDATE $? " Installing mysql "
 
 mysql -h mysql.malli.site -uroot -p$MYSQL_ROOT_PASSWORD -e 'use cities'
+
 if [ $? -ne 0 ]
 then
     mysql -h mysql.malli.site -uroot -pMYSQL_ROOT_PASSWORD < /app/db/schema.sql

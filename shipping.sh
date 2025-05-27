@@ -68,16 +68,16 @@ VALIDATE $? " Moving and renaming "
 cp $SCRIPT_DIR/shipping.service /etc/systemd/system/shipping.service
 
 systemctl daemon-reload
-VALIDATE $? " reload the system "
+VALIDATE $? "reload the system"
 
 systemctl enable shipping 
-VALIDATE $? " Enabling the shipping "
+VALIDATE $? "Enabling the shipping"
 
 systemctl start shipping 
-VALIDATE $? " Start the shipping "
+VALIDATE $? "Start the shipping"
 
 dnf install mysql -y 
-VALIDATE $? " Installing mysql "
+VALIDATE $? "Installing mysql"
 
  mysql -h mysql.malli.site -u root -p$MYSQL_ROOT_PASSWORD -e 'use cities'
 if [ $? -ne 0 ]

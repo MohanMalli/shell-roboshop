@@ -24,7 +24,7 @@ fi
 
 # validate functions takes input as exit status, what command they tried to install
 VALIDATE( ){ 
-    
+
     if [ $1 -eq 0 ]
     then 
         echo -e " $2 is ... $G SUCCESS $N " | tee -a $LOG_FILE
@@ -34,26 +34,26 @@ VALIDATE( ){
     fi        
 }
 
-dnf module disable redis -y &>>LOG_FILE
+dnf module disable redis -y &>>$LOG_FILE
 VALIDATE $? "Disabling redis "
 
-dnf module enable redis:7 -y &>>LOG_FILE
+dnf module enable redis:7 -y &>>$LOG_FILE
 VALIDATE $? "Enabling redis"
 
-dnf install redis -y &>>LOG_FILE
+dnf install redis -y &>>$LOG_FILE
 VALIDATE $? "Installing redis"
 
 sed -i -e 's/127.0.0.1/0.0.0.0/g' -e '/protected-mode/ c protected-mode no' /etc/redis/redis.conf
 VALIDATE $? "Edited redis.conf to accept remote connections"
 
 
-systemctl enable redis &>>LOG_FILE
+systemctl enable redis &>>$LOG_FILE
 VALIDATE $? "Enabling redis"
 
-systemctl start redis &>>LOG_FILE
+systemctl start redis &>>$LOG_FILE
 VALIDATE $? "Starting Redis"
 
 END_TIME=$(date +%s)
 TOTAL_TIME=$(($END_TIME - $START_TIME))
 
-echo -e " Script Exection completed successfully, $Y time taken: $TOTAL_TIME seconds $N" | tee -a $LOG_FIL
+echo -e " Script Exection completed successfully, $Y time taken: $TOTAL_TIME seconds $N" | tee -a $LOG_FILE 

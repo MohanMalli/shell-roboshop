@@ -33,13 +33,13 @@ VALIDATE(){
     fi        
 }
 
-dnf module disable nodejs -y &>>LOG_FILE
+dnf module disable nodejs -y &>>$LOG_FILE
 VALIDATE $? " Disabling nodejs "
 
-dnf module enable nodejs:20 -y &>>LOG_FILE
+dnf module enable nodejs:20 -y &>>$LOG_FILE
 VALIDATE $? " Enabling nodejs "
 
-dnf install nodejs -y &>>LOG_FILE
+dnf install nodejs -y &>>$LOG_FILE
 VALIDATE $? " Installing nodejs "
 
 id roboshop
@@ -54,22 +54,22 @@ fi
 mkdir -p /app 
 VALIDATE $? "Creating app directory" 
 
-curl -L -o /tmp/cart.zip https://roboshop-artifacts.s3.amazonaws.com/cart-v3.zip &>>LOG_FILE
+curl -L -o /tmp/cart.zip https://roboshop-artifacts.s3.amazonaws.com/cart-v3.zip &>>$LOG_FILE
 VALIDATE $? "Downloading cart"
 
 rm -rf /app/*  
 cd /app
-unzip /tmp/cart.zip &>>LOG_FILE
+unzip /tmp/cart.zip &>>$LOG_FILE
 VALIDATE $? "unzipping cart"
 
-npm install &>>LOG_FILE
+npm install &>>$LOG_FILE
 VALIDATE $? "Installing Dependencies"
 
 cp $SCRIPT_DIR/cart.service /etc/systemd/system/cart.service
 VALIDATE $? "Copying cart service"
 
-systemctl daemon-reload &>>LOG_FILE
-systemctl enable cart &>>LOG_FILE
+systemctl daemon-reload &>>$LOG_FILE
+systemctl enable cart &>>$LOG_FILE
 systemctl start cart 
 VALIDATE $? "Starting cart"
 

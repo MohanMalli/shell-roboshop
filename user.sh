@@ -33,13 +33,13 @@ VALIDATE(){
     fi        
 }
 
-dnf module disable nodejs -y &>>LOG_FILE
+dnf module disable nodejs -y &>>$LOG_FILE
 VALIDATE $? " Disabling nodejs "
 
-dnf module enable nodejs:20 -y &>>LOG_FILE
+dnf module enable nodejs:20 -y &>>$LOG_FILE
 VALIDATE $? " Enabling nodejs:20 "
 
-dnf install nodejs -y &>>LOG_FILE
+dnf install nodejs -y &>>$LOG_FILE
 VALIDATE $? " Installing nodejs:20 "
 
 id roboshop
@@ -54,23 +54,23 @@ fi
 mkdir -p /app 
 VALIDATE $? "Creating app directory" 
 
-curl -L -o /tmp/user.zip https://roboshop-artifacts.s3.amazonaws.com/user-v3.zip &>>LOG_FILE
+curl -L -o /tmp/user.zip https://roboshop-artifacts.s3.amazonaws.com/user-v3.zip &>>$LOG_FILE
 VALIDATE $? "Downloading user"
 
 rm -rf /app/*  
 cd /app
-unzip /tmp/user.zip &>>LOG_FILE
+unzip /tmp/user.zip &>>$LOG_FILE
 VALIDATE $? "unzipping user"
 
-npm install &>>LOG_FILE
+npm install &>>$LOG_FILE
 VALIDATE $? "Installing Dependencies"
 
 cp $SCRIPT_DIR/user.service /etc/systemd/system/user.service
 VALIDATE $? "Copying user service"
 
-systemctl daemon-reload &>>LOG_FILE
-systemctl enable user &>>LOG_FILE
-systemctl start user &>>LOG_FILE
+systemctl daemon-reload &>>$LOG_FILE
+systemctl enable user &>>$LOG_FILE
+systemctl start user &>>$LOG_FILE
 VALIDATE $? "user"
 
 END_TIME=$(date +%s)

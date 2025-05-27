@@ -1,4 +1,5 @@
 #!/bin/bash
+
 START_TIME=$(date +%s)
 USERID=$(id -u)
 R="\e[31m"
@@ -38,7 +39,7 @@ dnf module disable redis -y &>>$LOG_FILE
 VALIDATE $? "Disabling redis "
 
 dnf module enable redis:7 -y &>>$LOG_FILE
-VALIDATE $? "Enabling redis"
+VALIDATE $? "Enabling redis:7"
 
 dnf install redis -y &>>$LOG_FILE
 VALIDATE $? "Installing redis"

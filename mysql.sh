@@ -1,9 +1,10 @@
 #!/bin/bash
 
+START_TIME=$(date +%s)
 USERID=$(id -u)
 R="\e[31m"
-Y="\e[32m"
-G="\e[33m"
+G="\e[32m"
+Y="\e[33m"
 N="\e[0m"
 
 LOGS_FOLDER="/var/log/roboshop-logs"
@@ -49,10 +50,10 @@ VALIDATE(){
   mysql_secure_installation --set-root-pass $MYSQL_ROOT_PASSWORD 
   VALIDATE $? "Setting MySQL root password"
 
-END_TIME=$(date +%s)
-TOTAL_TIME=$(( $END_TIME - $START_TIME ))
+  END_TIME=$(date +%s)
+  TOTAL_TIME=$(( $END_TIME - $START_TIME ))
 
-echo -e "Script exection completed successfully, $Y time taken: $TOTAL_TIME seconds $N"
+  echo -e "Script exection completed successfully, $Y time taken: $TOTAL_TIME seconds $N"
 
   
 

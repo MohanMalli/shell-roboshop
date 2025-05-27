@@ -80,9 +80,9 @@ dnf install mysql -y
 VALIDATE $? " Installing mysql "
 
  
-mysql -h mysql.malli.site -uroot -pMYSQL_ROOT_PASSWORD < /app/db/schema.sql
-mysql -h mysql.malli.site -uroot -pMYSQL_ROOT_PASSWORD < /app/db/app-user.sql 
-mysql -h mysql.malli.site -uroot -pMYSQL_ROOT_PASSWORD < /app/db/master-data.sql
+mysql -h mysql.malli.site -uroot -p$MYSQL_ROOT_PASSWORD < /app/db/schema.sql
+mysql -h mysql.malli.site -uroot -p$MYSQL_ROOT_PASSWORD < /app/db/app-user.sql 
+mysql -h mysql.malli.site -uroot -p$MYSQL_ROOT_PASSWORD < /app/db/master-data.sql
 VALIDATE $? " Loading data bases "
  
 

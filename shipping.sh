@@ -79,12 +79,16 @@ VALIDATE $? " Start the shipping "
 dnf install mysql -y 
 VALIDATE $? " Installing mysql "
 
- 
-mysql -h mysql.malli.site -uroot -p$MYSQL_ROOT_PASSWORD < /app/db/schema.sql
-mysql -h mysql.malli.site -uroot -p$MYSQL_ROOT_PASSWORD < /app/db/app-user.sql 
-mysql -h mysql.malli.site -uroot -p$MYSQL_ROOT_PASSWORD < /app/db/master-data.sql
-VALIDATE $? " Loading data bases "
- 
+mysql -h mysql.malli.site -uroot -p$MYSQL_ROOT_PASSWORD -e 'use cities'
+if [ $? -ne 0 ]
+then 
+    mysql -h mysql.malli.site -uroot -p$MYSQL_ROOT_PASSWORD < /app/db/schema.sql
+    mysql -h mysql.malli.site -uroot -p$MYSQL_ROOT_PASSWORD < /app/db/app-user.sql 
+    mysql -h mysql.malli.site -uroot -p$MYSQL_ROOT_PASSWORD < /app/db/master-data.sql
+    VALIDATE $? " Loading data bases "
+else
+    echo -e "Data is already loaded into MySQL ... $Y SKIPPING $N"    
+fi
 
 systemctl restart shipping
 VALIDATE $? " Restarting shipping "

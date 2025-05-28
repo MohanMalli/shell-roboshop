@@ -90,7 +90,7 @@ VALIDATE $? "Installing mysql"
 #     echo -e "Data is already loaded into MySQL ... $Y SKIPPING $N"    
 # fi
 
-mysql -h mysql.malli.site -u root -p$MYSQL_ROOT_PASSWORD -e 'use cities'  
+mysql -h mysql.malli.site -uroot -p$MYSQL_ROOT_PASSWORD -e 'use cities'  
 if [ $? -ne 0 ]
 then
     mysql -h mysql.malli.site -uroot -p$MYSQL_ROOT_PASSWORD < /app/db/schema.sql 

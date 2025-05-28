@@ -9,13 +9,15 @@ If the service is not running, check logs for errors.
 Port Check:
 Run: netstat -lntp
 Verify port 27017 is listening.
+-----------------
 Connection Test:
-Run: mongosh --host mongodb.royalreddy.site
+Run: mongosh --host mongodb.malli.site
        Execute queries:show dbs
        use catalogue
        show collections
        db.products.find()
 Note: Install MongoDB shell client if not present.
+#############################################################
 MySQL
 Service Status:
 Run: sudo systemctl status mysqld
@@ -23,10 +25,12 @@ If the service is not running, check logs for errors.
 Port Check:
 Run: netstat -lntp
 Verify port 3306 is listening.
+----------------
 Connection Test:
-Run: mysql -h mysql.royalreddy.site -uroot -pRoboShop@1
+Run: mysql -h mysql.malli.site -uroot -pRoboShop@1
 Execute query:SHOW DATABASES;
 Note: Ensure the MySQL client is installed.
+###################################################################
 Redis
 Configuration Check:
 Update listen address in /etc/redis/redis.conf from 127.0.0.1 to 0.0.0.0.
@@ -37,6 +41,7 @@ If the service is not running, check logs for errors.
 Port Check:
 Run: netstat -lntp
 Verify port 6379 is listening.
+------------------------------------------------------------------------
 RabbitMQ
 Service Status:
 Run: sudo systemctl status rabbitmq
